@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace FixedProject
+namespace FixedProject.View
 {
 	public class Animation
 	{
@@ -15,10 +15,16 @@ namespace FixedProject
 		public Texture2D SpriteStrip
 		{
 			get { return spriteStrip; }
-			set { scale = value; }
+			set { spriteStrip = value; }
 		}
 		// The scale used to display the sprite strip
-		float scale;
+		private float scale;
+
+		public float Scale
+		{
+			get { return scale; }
+			set { scale = value; }
+		}
 
 		// The time since we last updated the frame
 		private int elapsedTime;
@@ -29,14 +35,23 @@ namespace FixedProject
 			set { elapsedTime = value; }
 		}
 		// The time we display a frame until the next one
-		int frameTime;
+		private int frameTime;
 
+		public int FrameTime
+		{
+			get { return frameTime; }
+			set { frameTime = value; }
+		}
 		// The number of frames that the animation contains
-		int frameCount;
+		private int frameCount;
 
+		public int FrameCount
+		{
+			get { return frameCount; }
+			set { frameCount = value; }
+		}
 		// The index of the current frame we are displaying
-		int currentFrame;
-
+		private int currentFrame;
 
 		public int CurrentFrame
 		{
@@ -44,8 +59,13 @@ namespace FixedProject
 			set { currentFrame = value; }
 		}
 		// The color of the frame we will be displaying
-		Color color;
+		private Color color;
 
+		public Color Color
+		{
+			get{ return color; }
+			set{ color = value; }
+		}
 		// The area of the image strip we want to display
 		Rectangle sourceRect = new Rectangle();
 
@@ -58,11 +78,18 @@ namespace FixedProject
 		public int FrameWidth
 		{
 			get { return frameWidth; }
-			set { frameWidth = value;
+			set { frameWidth = value; }
 		}
 
 		// Height of a given frame
 		private int frameHeight;
+
+		public int FrameHeight
+		{
+				get { return frameHeight; }
+				set { frameHeight = value; }
+
+		}
 
 		// The state of the Animation
 		private bool active;
@@ -70,14 +97,26 @@ namespace FixedProject
 		public bool Active
 		{
 				get { return active; }
-				set { active = alue; }
+				set { active = value; }
 		}
 
 		// Determines if the animation will keep playing or deactivate after one run
-		public bool Looping;
+		private bool looping;
+
+		public bool Looping
+		{
+			get { return looping; }
+			set { looping = value; }
+		}
 
 		// Width of a given frame
-		public Vector2 Position;
+		private Vector2 position;
+
+		public Vector2 Position
+		{
+			get { return position; }
+			set { position = value; }
+		}
 
 			public void Initialize(Texture2D texture, Vector2 position,
 				int frameWidth, int frameHeight, int frameCount,

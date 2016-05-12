@@ -2,6 +2,7 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using FixedProject.View;
 
 namespace FixedProject.Model
 {
@@ -10,6 +11,7 @@ namespace FixedProject.Model
 		private int score;
 		private bool active;
 		private int health;
+		private Animation playerAnimation;
 
 		public Texture2D PlayerTexture;
 
@@ -29,7 +31,7 @@ namespace FixedProject.Model
 
 		public int Width
 		{
-			get { return PlayerTexture.Width; }
+			get { return playerAnimation.FrameWidth; }
 		}
 
 		public int Score
@@ -38,10 +40,15 @@ namespace FixedProject.Model
 			set { score = value; }
 		}
 			
+		// Get the width of the player ship
+
+
+		// Get the height of the player ship
 		public int Height
 		{
-			get { return PlayerTexture.Height; }
+			get { return playerAnimation.FrameHeight; }
 		}
+
 		public void Initialize(Texture2D texture, Vector2 position)
 		{
 			this.active = true;
@@ -49,16 +56,37 @@ namespace FixedProject.Model
 			this.score = 0;
 			this.PlayerTexture = texture;
 			this.Position = position;
+
 		}
 
-		public void Update()
+			// Initialize the player
+			public void Initialize(Animation animation, Vector2 position)
+			{
+				this.playerAnimation = animation;
+
+				// Set the starting position of the player around the middle of the screen and to the back
+				this.Position = position;
+
+				// Set the player to be active
+				this.active = true;
+
+				// Set the player health
+				this.health = 100;
+
+				this.score = 0;
+			}
+
+		// Update the player animation
+		public void Update(GameTime gameTime)
 		{
-				
+			playerAnimation.Position = Position;
+			playerAnimation.Update(gameTime);
 		}
 
+		// Draw the player
 		public void Draw(SpriteBatch spriteBatch)
-		{ 
-			spriteBatch.Draw(PlayerTexture, Position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+		{
+			playerAnimation.Draw(spriteBatch);
 		}
 				
 	}
