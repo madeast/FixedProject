@@ -103,21 +103,7 @@ namespace FixedProject.Controller
 				player.Position.Y += playerMoveSpeed;
 			}
 
-			// Make sure that the player does not go out of bounds
-			player.Position.X = MathHelper.Clamp(player.Position.X, 0,GraphicsDevice.Viewport.Width - player.Width);
-			player.Position.Y = MathHelper.Clamp(player.Position.Y, 0,GraphicsDevice.Viewport.Height - player.Height);
 
-			// Save the previous state of the keyboard and game pad so we can determinesingle key/button presses
-			previousGamePadState = currentGamePadState;
-			previousKeyboardState = currentKeyboardState;
-
-			// Read the current state of the keyboard and gamepad and store it
-			currentKeyboardState = Keyboard.GetState();
-			currentGamePadState = GamePad.GetState(PlayerIndex.One);
-
-
-			//Update the player
-			UpdatePlayer(gameTime);
 
 		}
 
@@ -137,6 +123,21 @@ namespace FixedProject.Controller
             
 			// TODO: Add your update logic here
             
+			// Make sure that the player does not go out of bounds
+			player.Position.X = MathHelper.Clamp(player.Position.X, 0,GraphicsDevice.Viewport.Width - player.Width);
+			player.Position.Y = MathHelper.Clamp(player.Position.Y, 0,GraphicsDevice.Viewport.Height - player.Height);
+
+			// Save the previous state of the keyboard and game pad so we can determinesingle key/button presses
+			previousGamePadState = currentGamePadState;
+			previousKeyboardState = currentKeyboardState;
+
+			// Read the current state of the keyboard and gamepad and store it
+			currentKeyboardState = Keyboard.GetState();
+			currentGamePadState = GamePad.GetState(PlayerIndex.One);
+
+
+			//Update the player
+			UpdatePlayer(gameTime);
 			base.Update (gameTime);
 		}
 
