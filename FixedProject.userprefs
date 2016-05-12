@@ -1,0 +1,15 @@
+﻿<Properties StartupItem="FixedProject/FixedProject.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../../../../Library/Frameworks/MonoGame.framework/v3.5.1.1679/MonoGame.Content.Builder.targets">
+    <Files>
+      <File FileName="FixedProject/Controller/Game1.cs" Line="83" Column="2" />
+      <File FileName="FixedProject/Model/Player.cs" Line="6" Column="29" />
+      <File FileName="FixedProject/Controller/Program.cs" Line="12" Column="13" />
+      <File FileName="../../../../../Library/Frameworks/MonoGame.framework/v3.5.1.1679/MonoGame.Content.Builder.targets" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
