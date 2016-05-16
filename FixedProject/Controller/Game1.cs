@@ -30,6 +30,15 @@ namespace FixedProject.Controller
 		// A movement speed for the player
 		private float playerMoveSpeed;
 
+		// Image used to display the static background
+		private Texture2D mainBackground;
+
+		// Parallaxing Layers
+		private ParallaxingBackground bgLayer1;
+		private ParallaxingBackground bgLayer2;
+
+
+
 		public Game1 ()
 		{
 			graphics = new GraphicsDeviceManager (this);
@@ -50,6 +59,8 @@ namespace FixedProject.Controller
 			// Set a constant player move speed
 			playerMoveSpeed = 8.0f;
 
+			bgLayer1 = new ParallaxingBackground();
+			bgLayer2 = new ParallaxingBackground();
 
 			base.Initialize ();
 		}
