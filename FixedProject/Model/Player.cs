@@ -74,6 +74,7 @@ namespace FixedProject.Model
 				this.health = 100;
 
 				this.score = 0;
+
 			}
 
 		// Update the player animation
