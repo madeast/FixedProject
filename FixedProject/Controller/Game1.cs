@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 using FixedProject.Model;
 using FixedProject.View;
 using System.Collections.Generic;
@@ -47,6 +49,16 @@ namespace FixedProject.Controller
 		TimeSpan previousSpawnTime;
 		Texture2D explosionTexture;
 		List<Animation> explosions;
+
+		// The sound that is played when a laser is fired
+		SoundEffect laserSound;
+
+		// The sound used when the player or an enemy dies
+		SoundEffect explosionSound;
+
+		// The music played during gameplay
+		Song gameplayMusic;
+
 
 		// A random number generator
 		Random random;
@@ -127,11 +139,36 @@ namespace FixedProject.Controller
 
 			enemyTexture = Content.Load<Texture2D>("Animation/mineAnimation");
 
+			// Load the music
+			gameplayMusic = Content.Load<Song>("Sounds/gameMusic");
+
+			// Load the laser and explosion sound effect
+			laserSound = Content.Load<SoundEffect>("Sounds/laserFire");
+			explosionSound = Content.Load<SoundEffect>("Sounds/explosion");
+
+			// Start the music right away
+			PlayMusic(gameplayMusic);
+
 			projectileTexture = Content.Load<Texture2D>("Texture/laser");
 
 			explosionTexture = Content.Load<Texture2D>("Animation/explosion");
 
 			mainBackground = Content.Load<Texture2D>("Texture/mainbackground");
+		}
+
+		private void PlayMusic(Song song)
+		{
+			// Due to the way the MediaPlayer plays music,
+			// we have to catch the exception. Music will play when the game is not tethered
+			try
+			{
+				// Play the music
+				MediaPlayer.Play(song);
+
+				// Loop the currently playing song
+				MediaPlayer.IsRepeating = true;
+			}
+			catch { }
 		}
 
 		private void AddExplosion(Vector2 position)
@@ -186,6 +223,9 @@ namespace FixedProject.Controller
 
 				// Add the projectile, but add it to the front and center of the player
 				AddProjectile(player.Position + new Vector2(player.Width / 2, 0));
+
+				// Play the laser sound
+				laserSound.Play();
 			}
 		}
 
@@ -297,6 +337,9 @@ namespace FixedProject.Controller
 
 				// Add an Enemy
 				AddEnemy();
+
+				// Play the explosion sound
+				explosionSound.Play();
 			}
 
 			// Update the Enemies
@@ -409,7 +452,7 @@ namespace FixedProject.Controller
 			{
 				explosions[i].Draw(spriteBatch);
 			}
-
+			 
 			// Draw the Player
 			player.Draw(spriteBatch);
 
