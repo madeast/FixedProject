@@ -49,6 +49,7 @@ namespace FixedProject.Model
 				this.position = position;
 				this.damage = 5000;
 				this.secondarySpeed = .3f;
+				this.active = true;
 		}
 
 		public void Update()
@@ -59,7 +60,7 @@ namespace FixedProject.Model
 
 		public void Draw(SpriteBatch spriteBatch)
 		{ 
-			spriteBatch.Draw(PlayerTexture, Position, null, Color.White, position.Y * 3, Vector2.Zero, 1f, SpriteEffects.None, 0f);			}
+			spriteBatch.Draw(Texture, Position, null, Color.White, position.Y * 3, Vector2.Zero, 1f, SpriteEffects.None, 0f);			}
 	}
 }
 

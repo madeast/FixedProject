@@ -115,7 +115,7 @@ namespace FixedProject.Controller
 			// Set the laser to fire every quarter second
 			fireTime = TimeSpan.FromSeconds(.15f);
 
-			secondaryWeaponTime = TimeSpan.FromSeconds (.3f)
+			secondaryWeaponTime = TimeSpan.FromSeconds (.3f);
 			secondWeapons = new List<SecondWeapon> ();
 
 			explosions = new List<Animation>();
@@ -225,7 +225,7 @@ namespace FixedProject.Controller
 
 			// Use the Keyboard / Dpad
 
-			if(curentKeyboardState.IsKeyDown(Keys.Left) ||
+			if(currentKeyboardState.IsKeyDown(Keys.Left) ||
 				currentGamePadState.DPad.Left == ButtonState.Pressed)
 			{
 				player.Position.X -= playerMoveSpeed;
@@ -259,10 +259,10 @@ namespace FixedProject.Controller
 				laserSound.Play();
 			}
 
-			if(gameTime.TotalGameTime - previousFireTime > secondaryWeaponTime && currentKeyboardState.IsKeyDown ((Keys.U))
+			if(gameTime.TotalGameTime - previouSecondaryTime > secondaryWeaponTime && currentKeyboardState.IsKeyDown ((Keys.U)))
 			{
 					previousFireTime = gameTime.TotalGameTime;
-					AddSecondWeapon(player.VertexPosition + new Vector2(player.Width/2, 0));
+					AddSecondWeapon(player.Position + new Vector2(player.Width/2, 0));
 			}
 		}
 
