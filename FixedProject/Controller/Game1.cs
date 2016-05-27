@@ -342,6 +342,29 @@ namespace FixedProject.Controller
 					}
 				}
 			}
+
+			// Second Weapon vs Enemy Collision
+			for (int i = 0; i < secondWeapons.Count; i++)
+			{
+				for (int j = 0; j < enemies.Count; j++)
+				{
+					// Create the rectangles we need to determine if we collided with each other
+					rectangle1 = new Rectangle((int)secondWeapons[i].Position.X - 
+						secondWeapons[i].Width / 2,(int)secondWeapons[i].Position.Y - 
+						secondWeapons[i].Height / 2,secondWeapons[i].Width, secondWeapons[i].Height);
+
+					rectangle2 = new Rectangle((int)enemies[j].Position.X - enemies[j].Width / 2,
+						(int)enemies[j].Position.Y - enemies[j].Height / 2,
+						enemies[j].Width, enemies[j].Height);
+
+					// Determine if the two objects collided with each other
+					if (rectangle1.Intersects(rectangle2))
+					{
+						enemies[j].Health -= secondWeapons[i].Damage;
+						secondWeapons[i].Active = false;
+					}
+				}
+			}
 		}
 
 		private void AddEnemy()

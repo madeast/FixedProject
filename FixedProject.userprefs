@@ -1,14 +1,15 @@
 ﻿<Properties StartupItem="FixedProject/FixedProject.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="FixedProject/Controller/Game1.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="FixedProject/Model/SecondWeapon.cs">
     <Files>
-      <File FileName="FixedProject/Controller/Game1.cs" Line="190" Column="4" />
+      <File FileName="FixedProject/Controller/Game1.cs" Line="363" Column="41" />
       <File FileName="FixedProject/Model/Player.cs" Line="77" Column="4" />
-      <File FileName="FixedProject/Controller/Program.cs" Line="1" Column="1" />
       <File FileName="FixedProject/View/Animation.cs" Line="1" Column="1" />
       <File FileName="FixedProject/View/ParallaxingBackground.cs" Line="1" Column="1" />
       <File FileName="FixedProject/Model/Enemy.cs" Line="110" Column="5" />
       <File FileName="FixedProject/Model/Projectile.cs" Line="78" Column="5" />
+      <File FileName="FixedProject/Model/SecondWeapon.cs" Line="64" Column="27" />
+      <File FileName="FixedProject/Controller/Program.cs" Line="31" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

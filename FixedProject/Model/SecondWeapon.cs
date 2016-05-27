@@ -12,6 +12,20 @@ namespace FixedProject.Model
 		private Vector2 position;
 		private bool active;
 		private Viewport viewport;
+		private int height;
+		private int width;
+
+
+		public int Height
+		{
+			get { return Texture.Height; }
+
+		}
+
+		public int Width
+		{
+			get { return Texture.Width; }
+		}
 
 		public bool Active
 		{
@@ -47,7 +61,7 @@ namespace FixedProject.Model
 				this.viewport = viewport;
 				this.texture = texture;
 				this.position = position;
-				this.damage = 5000;
+				this.damage = 50000000;
 				this.secondarySpeed = .3f;
 				this.active = true;
 		}
