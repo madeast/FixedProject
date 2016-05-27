@@ -40,6 +40,11 @@ namespace FixedProject.Controller
 		private ParallaxingBackground bgLayer1;
 		private ParallaxingBackground bgLayer2;
 
+		private TimeSpan secondaryWeaponTime;
+		private TimeSpan previouSecondaryTime;
+		private List<SecondWeapon> secondWeapons;
+		private Texture2D secondWeaponTexture;
+
 		// Enemies
 		Texture2D enemyTexture;
 		List<Enemy> enemies;
@@ -110,6 +115,9 @@ namespace FixedProject.Controller
 			// Set the laser to fire every quarter second
 			fireTime = TimeSpan.FromSeconds(.15f);
 
+			secondaryWeaponTime = TimeSpan.FromSeconds (.3f)
+			secondWeapons = new List<SecondWeapon> ();
+
 			explosions = new List<Animation>();
 
 			base.Initialize ();
@@ -132,6 +140,8 @@ namespace FixedProject.Controller
 			Vector2 playerPosition = new Vector2 (GraphicsDevice.Viewport.TitleSafeArea.X, GraphicsDevice.Viewport.TitleSafeArea.Y
 				+ GraphicsDevice.Viewport.TitleSafeArea.Height / 2);
 			player.Initialize(playerAnimation, playerPosition);
+
+			secondWeaponTexture = Content.Load<Texture2D> ("Texture/YellowLaser");
 
 			// Load the parallaxing background
 			bgLayer1.Initialize(Content, "Texture/bgLayer1", GraphicsDevice.Viewport.Width, -1);
@@ -185,6 +195,26 @@ namespace FixedProject.Controller
 			projectiles.Add(projectile);
 		}
 
+		private void AddSecondWeapon(Vector2 position)
+		{
+			SecondWeapon yellowLaser = new SecondWeapon();
+			yellowLaser.Initialize (GraphicsDevice.Viewport, secondWeaponTexture, position);
+			secondWeapons.Add(yellowLaser);
+		}
+
+		private void UpdateSecondWeapons()
+		{
+			for (int i = secondWeapons.Count - 1; i >= 0; i--) 
+			{
+				secondWeapons[i].Update();
+
+				if (secondWeapons[i].Active == false)
+				{
+					secondWeapons.RemoveAt(i);
+				} 
+			}
+		}
+	
 		private void UpdatePlayer(GameTime gameTime)
 		{
 			player.Update (gameTime);
@@ -194,7 +224,8 @@ namespace FixedProject.Controller
 			player.Position.Y -= currentGamePadState.ThumbSticks.Left.Y *playerMoveSpeed;
 
 			// Use the Keyboard / Dpad
-			if (currentKeyboardState.IsKeyDown(Keys.Left) ||
+
+			if(curentKeyboardState.IsKeyDown(Keys.Left) ||
 				currentGamePadState.DPad.Left == ButtonState.Pressed)
 			{
 				player.Position.X -= playerMoveSpeed;
@@ -226,6 +257,12 @@ namespace FixedProject.Controller
 
 				// Play the laser sound
 				laserSound.Play();
+			}
+
+			if(gameTime.TotalGameTime - previousFireTime > secondaryWeaponTime && currentKeyboardState.IsKeyDown ((Keys.U))
+			{
+					previousFireTime = gameTime.TotalGameTime;
+					AddSecondWeapon(player.VertexPosition + new Vector2(player.Width/2, 0));
 			}
 		}
 
@@ -413,6 +450,8 @@ namespace FixedProject.Controller
 			UpdateProjectiles();
 			// Update the explosions
 			UpdateExplosions(gameTime);
+			// Update the SecondaryWeapon
+			UpdateSecondWeapons();
 
 			base.Update (gameTime);
 		}
@@ -445,6 +484,11 @@ namespace FixedProject.Controller
 			for (int i = 0; i < projectiles.Count; i++)
 			{
 				projectiles[i].Draw(spriteBatch);
+			}
+
+			for (int i = 0; i < secondWeapons.Count; i++)
+			{
+				secondWeapons[i].Draw(spriteBatch);
 			}
 
 			// Draw the explosions

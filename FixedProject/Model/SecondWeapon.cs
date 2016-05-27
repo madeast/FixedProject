@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace FixedProject
+namespace FixedProject.Model
 {
 	public class SecondWeapon
 	{
@@ -10,7 +10,14 @@ namespace FixedProject
 		private int damage;
 		private float secondarySpeed;
 		private Vector2 position;
+		private bool active;
+		private Viewport viewport;
 
+		public bool Active
+		{
+			get { return active; }
+			set { active = value; }
+		}
 		public Texture2D Texture
 		{
 			get { return texture; }
@@ -26,7 +33,7 @@ namespace FixedProject
 		public float SecondarySpeed
 		{
 			get { return secondarySpeed; }
-			set { secondarySpeed = value; 
+			set { secondarySpeed = value; }
 		}
 
 		public Vector2 Position
@@ -35,18 +42,19 @@ namespace FixedProject
 				set { position = value; }
 		}
 
-		public void Initialize(Texture2D texture, Vector2 position)
+		public void Initialize(Viewport viewport, Texture2D texture, Vector2 position)
 		{
+				this.viewport = viewport;
 				this.texture = texture;
 				this.position = position;
 				this.damage = 5000;
-				this.secondarySpeed = .3;
+				this.secondarySpeed = .3f;
 		}
 
 		public void Update()
 		{
 				position.X += secondarySpeed;
-				position.Y += .25;
+				position.Y += .25f;
 		}
 
 		public void Draw(SpriteBatch spriteBatch)
